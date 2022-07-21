@@ -40,7 +40,7 @@ public class HomeController {
 	@RequestMapping(value = "write")
 	public String write(HttpServletRequest request) {
 		
-		//request객체로 파라미터 값 빼기
+		//request객체로 파라미터 값 전달
 		String mwriter = request.getParameter("mwriter");
 		String mcontent = request.getParameter("mcontent");
 		
@@ -59,5 +59,13 @@ public class HomeController {
 		model.addAttribute("list", dtos);
 		
 		return "list";
+	}
+	
+	@RequestMapping(value = "/delete")
+	public String delete(HttpServletRequest request) {
+		
+		dao.deleteDao(request.getParameter("mid"));
+		
+		return "redirect:list";
 	}
 }

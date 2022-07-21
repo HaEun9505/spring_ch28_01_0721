@@ -1,5 +1,6 @@
 package com.haeun.ch2801.dto;
 
+//데이터 이동 객체 클래스
 public class ContentDto {
 	
 	private int mid;			//게시글 번호

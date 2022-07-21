@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import com.haeun.ch2801.dto.ContentDto;
 
@@ -38,7 +39,7 @@ public class ContentDao implements IDao {
 		return dtos;
 	}
 
-	@Override
+	@Override	//추상메소드 오버라이딩
 	public void writeDao(final String mwriter, final String mcontent) {
 		
 		this.template.update(new PreparedStatementCreator() {
@@ -55,6 +56,25 @@ public class ContentDao implements IDao {
 		});
 		
 	}
+
+	@Override
+	public void deleteDao(final String mid) {
+		
+		String sql = "DELETE FROM simple_board WHERE mid=?";
+		
+		this.template.update(sql, new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, Integer.parseInt(mid));
+				
+			}
+			
+		});
+		
+				
+	}
+	
 	
 	
 }
